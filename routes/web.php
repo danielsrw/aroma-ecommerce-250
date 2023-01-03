@@ -46,7 +46,7 @@ Route::group(['prefix'=>'/dashboard', 'middleware' => ['user']],function(){
     Route::get('/user-review/edit/{id}', 'HomeController@productReviewEdit')->name('user.productreview.edit');
 
     Route::patch('/user-review/update/{id}', 'HomeController@productReviewUpdate')->name('user.productreview.update');
-    
+
     // Post comment
     Route::get('user-post/comment', 'HomeController@userComment')->name('user.post-comment.index');
 
@@ -55,7 +55,7 @@ Route::group(['prefix'=>'/dashboard', 'middleware' => ['user']],function(){
     Route::get('user-post/comment/edit/{id}', 'HomeController@userCommentEdit')->name('user.post-comment.edit');
 
     Route::patch('user-post/comment/udpate/{id}', 'HomeController@userCommentUpdate')->name('user.post-comment.update');
-    
+
     // Password Change
     Route::get('change-password', 'HomeController@changePassword')->name('user.change.password.form');
 
@@ -66,11 +66,25 @@ Route::group(['prefix'=>'/dashboard', 'middleware' => ['user']],function(){
 // Frontend Routes
 Route::get('/', 'App\Http\Controllers\FrontendController@home')->name('home');
 Route::get('/about', 'App\Http\Controllers\FrontendController@about')->name('about');
-Route::get('/shop', 'App\Http\Controllers\FrontendController@shop')->name('shop');
+
+Route::get('/product-grids','App\Http\Controllers\FrontendController@productGrids')->name('product-grids');
+Route::get('/product-lists','App\Http\Controllers\FrontendController@productLists')->name('product-lists');
+Route::match(['get','post'],'/filter','App\Http\Controllers\FrontendController@productFilter')->name('shop.filter');
+Route::get('/product-cat/{slug}','App\Http\Controllers\FrontendController@productCat')->name('product-cat');
+Route::get('/product-sub-cat/{slug}/{sub_slug}','App\Http\Controllers\FrontendController@productSubCat')->name('product-sub-cat');
+Route::get('/product-brand/{slug}','App\Http\Controllers\FrontendController@productBrand')->name('product-brand');
+
 Route::get('/product', 'App\Http\Controllers\FrontendController@product')->name('product');
 Route::get('/contact', 'App\Http\Controllers\FrontendController@contact')->name('contact');
+
+// Cart
 Route::get('/cart', 'App\Http\Controllers\FrontendController@cart')->name('cart');
-Route::get('/checkout', 'App\Http\Controllers\FrontendController@checkout')->name('checkout');
+Route::get('/add-to-cart/{slug}','App\Http\Controllers\CartController@addToCart')->name('add-to-cart')->middleware('user');
+Route::post('/add-to-cart','App\Http\Controllers\CartController@singleAddToCart')->name('single-add-to-cart')->middleware('user');
+Route::get('cart-delete/{id}','App\Http\Controllers\CartController@cartDelete')->name('cart-delete');
+Route::post('cart-update','App\Http\Controllers\CartController@cartUpdate')->name('cart.update');
+
+Route::get('/checkout', 'App\Http\Controllers\FrontendController@checkout')->name('checkout')->middleware('user');;
 Route::get('/confirmation', 'App\Http\Controllers\FrontendController@confirmation')->name('confirmation');
 
 // Blog
@@ -160,3 +174,6 @@ Route::group(['prefix'=>'/admin', 'middleware'=>['auth', 'admin']],function(){
     Route::post('change-password', 'AdminController@changPasswordStore')->name('change.password');
 });
 
+Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['web', 'auth']], function () {
+     \UniSharp\LaravelFilemanager\Lfm::routes();
+});

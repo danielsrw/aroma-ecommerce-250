@@ -20,7 +20,7 @@
                     <nav aria-label="breadcrumb" class="banner-breadcrumb">
                         <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li>
-                        <li class="breadcrumb-item"><a href="{{ route('shop') }}">Shop</a></li>
+                        <li class="breadcrumb-item"><a href="{{ route('product-grids') }}">Shop</a></li>
                         <li class="breadcrumb-item active" aria-current="page">Product</li>
                         </ol>
                     </nav>
@@ -63,7 +63,7 @@
 							<input type="text" name="qty" id="sst" size="2" maxlength="12" value="1" title="Quantity:" class="input-text qty">
 							<button onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst ) &amp;&amp; sst > 0 ) result.value--;return false;"
                class="reduced items-count" type="button"><i class="ti-angle-right"></i></button>
-							<a class="button primary-btn" href="#">Add to Cart</a>               
+							<a class="button primary-btn" href="#">Add to Cart</a>
 						</div>
 						<div class="card_area d-flex align-items-center">
 							<a class="icon_btn" href="#"><i class="lnr lnr lnr-diamond"></i></a>
@@ -286,54 +286,54 @@
 										<ul class="list">
 											<li>
                                                 <a href="#">
-                                                    5 Star 
+                                                    5 Star
                                                     <i class="fa fa-star"></i>
                                                     <i class="fa fa-star"></i>
                                                     <i class="fa fa-star"></i>
                                                     <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i> 
+                                                    <i class="fa fa-star"></i>
                                                     01
                                                 </a>
                                             </li>
 											<li>
                                                 <a href="#">
-                                                    4 Star 
+                                                    4 Star
                                                     <i class="fa fa-star"></i>
                                                     <i class="fa fa-star"></i>
                                                     <i class="fa fa-star"></i>
                                                     <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i> 
+                                                    <i class="fa fa-star"></i>
                                                     01
                                                 </a>
                                             </li>
 											<li>
                                                 <a href="#">
-                                                    3 Star 
+                                                    3 Star
                                                     <i class="fa fa-star"></i>
                                                     <i class="fa fa-star"></i>
                                                     <i class="fa fa-star"></i>
                                                     <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i> 
+                                                    <i class="fa fa-star"></i>
                                                     01
                                                 </a>
                                             </li>
 											<li>
-                                                <a href="#">2 Star 
+                                                <a href="#">2 Star
                                                     <i class="fa fa-star"></i>
                                                     <i class="fa fa-star"></i>
                                                     <i class="fa fa-star"></i>
                                                     <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i> 
+                                                    <i class="fa fa-star"></i>
                                                     01
                                                 </a>
                                             </li>
 											<li>
-                                                <a href="#">1 Star 
+                                                <a href="#">1 Star
                                                     <i class="fa fa-star"></i>
                                                     <i class="fa fa-star"></i>
                                                     <i class="fa fa-star"></i>
                                                     <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i> 
+                                                    <i class="fa fa-star"></i>
                                                     01
                                                 </a>
                                             </li>

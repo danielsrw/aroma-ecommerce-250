@@ -2,7 +2,12 @@
     <div class="main_menu">
         <nav class="navbar navbar-expand-lg navbar-light">
             <div class="container">
-                <a class="navbar-brand logo_h" href="{{ route('home') }}"><img src="{{ asset('frontend/img/logo.png') }}" alt=""></a>
+                @php
+                    $settings=DB::table('settings')->get();
+                @endphp
+                <a class="navbar-brand logo_h" href="{{ route('home') }}">
+                    <img src="@foreach($settings as $data) {{ asset('frontend/img/logo.png') }} @endforeach" alt="">
+                </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
@@ -10,19 +15,19 @@
                 </button>
                 <div class="collapse navbar-collapse offset" id="navbarSupportedContent">
                     <ul class="nav navbar-nav menu_nav ml-auto mr-auto">
-                        <li class="nav-item {{ Request::is('/') ? 'active' : '' }}">
+                        <li class="nav-item {{Request::path()=='/' ? 'active' : ''}}">
                             <a class="nav-link" href="{{ route('home') }}">Home</a>
                         </li>
-                        <li class="nav-item {{ Request::is('/about') ? 'active' : '' }}">
+                        <li class="nav-item {{ Request::path()=='about' ? 'active' : '' }}">
                             <a class="nav-link" href="{{ route('about') }}">About</a>
                         </li>
-                        <li class="nav-item {{ Request::is('/shop') ? 'active' : '' }}">
-                            <a class="nav-link" href="{{ route('shop') }}">Shop</a>
+                        <li class="nav-item @if(Request::path()=='product-grids'||Request::path()=='product-lists')  active  @endif">
+                            <a class="nav-link" href="{{ route('product-grids') }}">Shop</a>
                         </li>
-                        <li class="nav-item {{ Request::is('/blog') ? 'active' : '' }}">
+                        <li class="nav-item {{ Request::path()=='blog' ? 'active' : '' }}">
                             <a class="nav-link" href="{{ route('blog') }}">Blog</a>
                         </li>
-                        <li class="nav-item {{ Request::is('/contact') ? 'active' : '' }}">
+                        <li class="nav-item {{ Request::path()=='contact' ? 'active' : '' }}">
                             <a class="nav-link" href="{{ route('contact') }}">Contact</a>
                         </li>
                     </ul>
@@ -41,13 +46,21 @@
                                 </button>
                             </a>
                         </li>
+                        <li>
+                            <a href="">
+                                <button>
+                                    <i class="ti-location-pin"></i>
+                                    <span class="nav-shop__circle">t</span>
+                                </button>
+                            </a>
+                        </li>
                         @auth
                             @if(Auth::user()->role=='admin')
                                 <li class="nav-item mr-0">
                                     <a class="button button-header" href="{{ route('admin') }}">Dashboard</a>
                                 </li>
                             @else
-                                <li class="nav-item mr-0">
+                                <li class="nav-item mr-0 {{ Request::path()=='user' ? 'active' : '' }}">
                                     <a class="button button-header" href="{{ route('user') }}">Dashboard</a>
                                 </li>
                             @endif

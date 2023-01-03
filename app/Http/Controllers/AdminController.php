@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Spatie\Activitylog\Models\Activity;
 use App\Rules\MatchOldPassword;
 use Illuminate\Http\Request;
-use App\Models\Settings;
+use App\Models\Setting;
 use App\Models\User;
 use Carbon\Carbon;
 use Hash;
@@ -49,7 +49,7 @@ class AdminController extends Controller
     }
 
     public function settings(){
-        $data=Settings::first();
+        $data=Setting::first();
         return view('admin.pages.setting')->with('data',$data);
     }
 
@@ -66,7 +66,7 @@ class AdminController extends Controller
         ]);
         $data=$request->all();
         // return $data;
-        $settings=Settings::first();
+        $settings=Setting::first();
         // return $settings;
         $status=$settings->fill($data)->save();
         if($status){
@@ -88,9 +88,9 @@ class AdminController extends Controller
             'new_password' => ['required'],
             'new_confirm_password' => ['same:new_password'],
         ]);
-   
+
         User::find(auth()->user()->id)->update(['password'=> Hash::make($request->new_password)]);
-   
+
         return redirect()->route('admin')->with('success','Password successfully changed');
     }
 

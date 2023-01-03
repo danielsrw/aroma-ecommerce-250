@@ -11,7 +11,7 @@
                     <h4>Shop is fun</h4>
                     <h1>Browse Our Premium Product</h1>
                     <p>Us which over of signs divide dominion deep fill bring they're meat beho upon own earth without morning over third. Their male dry. They are great appear whose land fly grass.</p>
-                    <a class="button button-hero" href="{{ route('shop') }}">Browse Now</a>
+                    <a class="button button-hero" href="{{ route('product-grids') }}">Browse Now</a>
                 </div>
             </div>
         </div>
@@ -22,21 +22,21 @@
     <div class="owl-carousel owl-theme hero-carousel">
         <div class="hero-carousel__slide">
             <img src="{{ asset('frontend/img/home/hero-slide1.png') }}" alt="" class="img-fluid">
-            <a href="{{ route('shop') }}" class="hero-carousel__slideOverlay">
+            <a href="{{ route('product-grids') }}" class="hero-carousel__slideOverlay">
                 <h3>Wireless Headphone</h3>
                 <p>Accessories Item</p>
             </a>
         </div>
         <div class="hero-carousel__slide">
             <img src="{{ asset('frontend/img/home/hero-slide2.png') }}" alt="" class="img-fluid">
-            <a href="{{ route('shop') }}" class="hero-carousel__slideOverlay">
+            <a href="{{ route('product-grids') }}" class="hero-carousel__slideOverlay">
                 <h3>Wireless Headphone</h3>
                 <p>Accessories Item</p>
             </a>
         </div>
         <div class="hero-carousel__slide">
             <img src="{{ asset('frontend/img/home/hero-slide3.png') }}" alt="" class="img-fluid">
-            <a href="{{ route('shop') }}" class="hero-carousel__slideOverlay">
+            <a href="{{ route('product-grids') }}" class="hero-carousel__slideOverlay">
                 <h3>Wireless Headphone</h3>
                 <p>Accessories Item</p>
             </a>

@@ -4,46 +4,67 @@
         <ul class="main-categories">
             <li class="common-filter">
                 <form action="#">
-                    <ul>
-                        <li class="filter-list"><input class="pixel-radio" type="radio" id="men" name="brand"><label for="men">Men<span> (3600)</span></label></li>
-                        <li class="filter-list"><input class="pixel-radio" type="radio" id="women" name="brand"><label for="women">Women<span> (3600)</span></label></li>
-                        <li class="filter-list"><input class="pixel-radio" type="radio" id="accessories" name="brand"><label for="accessories">Accessories<span> (3600)</span></label></li>
-                        <li class="filter-list"><input class="pixel-radio" type="radio" id="footwear" name="brand"><label for="footwear">Footwear<span> (3600)</span></label></li>
-                        <li class="filter-list"><input class="pixel-radio" type="radio" id="bayItem" name="brand"><label for="bayItem">Bay item<span> (3600)</span></label></li>
-                        <li class="filter-list"><input class="pixel-radio" type="radio" id="electronics" name="brand"><label for="electronics">Electronics<span> (3600)</span></label></li>
-                        <li class="filter-list"><input class="pixel-radio" type="radio" id="food" name="brand"><label for="food">Food<span> (3600)</span></label></li>
-                    </ul>
+                    @php
+                        // $category = new Category();
+                        $menu=App\Models\Category::getAllParentWithChild();
+                    @endphp
+                    @if($menu)
+                        <ul>
+                            @foreach($menu as $cat_info)
+                                @if($cat_info->child_cat->count()>0)
+                                    <li class="filter-list">
+                                        <a href="{{route('product-cat',$cat_info->slug)}}" style="color: black">
+                                            {{$cat_info->title}}
+                                        </a>
+                                        <ul>
+                                            @foreach($cat_info->child_cat as $sub_menu)
+                                                <li>
+                                                    <a href="{{route('product-sub-cat',[$cat_info->slug,$sub_menu->slug])}}">
+                                                        {{$sub_menu->title}}
+                                                    </a>
+                                                </li>
+                                            @endforeach
+                                        </ul>
+                                    </li>
+                                @else
+                                    <li class="filter-list">
+                                        <a href="{{route('product-cat',$cat_info->slug)}}">{{$cat_info->title}}</a>
+                                    </li>
+                                @endif
+                            @endforeach
+                        </ul>
+                    @endif
                 </form>
             </li>
         </ul>
     </div>
     <div class="sidebar-filter">
-        <div class="top-filter-head">Product Filters</div>
+        <div class="top-filter-head">Product Brands</div>
         <div class="common-filter">
-            <div class="head">Brands</div>
-            <form action="#">
-                <ul>
-                    <li class="filter-list"><input class="pixel-radio" type="radio" id="apple" name="brand"><label for="apple">Apple<span>(29)</span></label></li>
-                    <li class="filter-list"><input class="pixel-radio" type="radio" id="asus" name="brand"><label for="asus">Asus<span>(29)</span></label></li>
-                    <li class="filter-list"><input class="pixel-radio" type="radio" id="gionee" name="brand"><label for="gionee">Gionee<span>(19)</span></label></li>
-                    <li class="filter-list"><input class="pixel-radio" type="radio" id="micromax" name="brand"><label for="micromax">Micromax<span>(19)</span></label></li>
-                    <li class="filter-list"><input class="pixel-radio" type="radio" id="samsung" name="brand"><label for="samsung">Samsung<span>(19)</span></label></li>
-                </ul>
-            </form>
+            <ul>
+                @php
+                    $brands=DB::table('brands')->orderBy('title','ASC')->where('status','active')->get();
+                @endphp
+                @foreach($brands as $brand)
+                    <li class="filter-list">
+                        <a href="{{ route('product-brand',$brand->slug) }}" style="color: black">
+                            {{ $brand->title }}
+                        </a>
+                    </li>
+                @endforeach
+            </ul>
         </div>
         <div class="common-filter">
             <div class="head">Color</div>
-            <form action="#">
-                <ul>
-                    <li class="filter-list"><input class="pixel-radio" type="radio" id="black" name="color"><label for="black">Black<span>(29)</span></label></li>
-                    <li class="filter-list"><input class="pixel-radio" type="radio" id="balckleather" name="color"><label for="balckleather">Black
-                        Leather<span>(29)</span></label></li>
-                    <li class="filter-list"><input class="pixel-radio" type="radio" id="blackred" name="color"><label for="blackred">Black
-                        with red<span>(19)</span></label></li>
-                    <li class="filter-list"><input class="pixel-radio" type="radio" id="gold" name="color"><label for="gold">Gold<span>(19)</span></label></li>
-                    <li class="filter-list"><input class="pixel-radio" type="radio" id="spacegrey" name="color"><label for="spacegrey">Spacegrey<span>(19)</span></label></li>
-                </ul>
-            </form>
+            <ul>
+                <li class="filter-list"><input class="pixel-radio" type="radio" id="black" name="color"><label for="black">Black<span>(29)</span></label></li>
+                <li class="filter-list"><input class="pixel-radio" type="radio" id="balckleather" name="color"><label for="balckleather">Black
+                    Leather<span>(29)</span></label></li>
+                <li class="filter-list"><input class="pixel-radio" type="radio" id="blackred" name="color"><label for="blackred">Black
+                    with red<span>(19)</span></label></li>
+                <li class="filter-list"><input class="pixel-radio" type="radio" id="gold" name="color"><label for="gold">Gold<span>(19)</span></label></li>
+                <li class="filter-list"><input class="pixel-radio" type="radio" id="spacegrey" name="color"><label for="spacegrey">Spacegrey<span>(19)</span></label></li>
+            </ul>
         </div>
         <div class="common-filter">
             <div class="head">Price</div>
